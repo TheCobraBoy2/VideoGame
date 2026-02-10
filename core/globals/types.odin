@@ -13,11 +13,20 @@ DrawDebug :: bool
 
 Entity :: struct {
   position : rl.Vector2,
-  size : rl.Vector2,
   color : rl.Color,
+  speed : f32
+}
+
+RectEntity :: struct {
+  using entity : Entity,
+  size : rl.Vector2,
   origin : Anchor,
   rotation : f32,
-  speed : f32
+}
+
+CircleEntity :: struct {
+  using entity : Entity,
+  size : f32,
 }
 
 Anchor :: enum {

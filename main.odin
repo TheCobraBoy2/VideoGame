@@ -9,7 +9,6 @@ main :: proc() {
   defer core.killWindow()
 
   game.initializeGame()
-
   core.drawDebug = &game.state.drawDebug
 
   for !rl.WindowShouldClose() {

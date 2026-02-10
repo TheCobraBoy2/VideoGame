@@ -3,7 +3,12 @@ package game
 import "../core/globals"
 
 Player :: struct {
-  using entity : globals.Entity,
+  using rectEntity : globals.RectEntity,
+}
+
+Enemy :: struct {
+  using circleEntity : globals.CircleEntity,
+  target : ^globals.Entity,
 }
 
 State :: struct {
@@ -13,3 +18,4 @@ State :: struct {
 
 state : State
 player : Player
+enemies : [dynamic]Enemy

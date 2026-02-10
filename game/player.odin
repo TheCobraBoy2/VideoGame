@@ -24,5 +24,5 @@ playerMovement :: proc() {
   }
 
   dir = rl.Vector2Normalize(dir)
-  player.position += (dir * player.speed) * state.dt
+  player.position += dir * ( player.speed * state.dt)
 }

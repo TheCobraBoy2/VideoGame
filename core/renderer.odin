@@ -23,7 +23,17 @@ drawRectPro :: proc(pos, size: rl.Vector2, color: rl.Color, rotation: f32, origi
     color
   )
   if drawDebug^ {
-    rl.DrawRectangleLinesEx(createRectangleV(pos - size * anchor, size), 2, rl.RED)
-    rl.DrawCircleV(pos, 2, rl.RED)
+    rl.DrawRectangleLinesEx(createRectangleV(pos - size * anchor, size), 3, rl.RED)
+    rl.DrawCircleV(pos, 3, rl.RED)
+  }
+}
+
+drawCircle :: proc(pos: rl.Vector2, size: f32, color: rl.Color) {
+  rl.DrawCircleV(pos, size, color)
+  if drawDebug^ {
+    rl.DrawCircleV(pos, 3, rl.WHITE)
+    rl.DrawCircleLinesV(pos, size, rl.WHITE)
+    rl.DrawCircleLinesV(pos, size + 1, rl.WHITE)
+    rl.DrawCircleLinesV(pos, size + 2, rl.WHITE)
   }
 }
