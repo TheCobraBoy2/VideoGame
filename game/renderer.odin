@@ -3,6 +3,7 @@ package game
 import rl "vendor:raylib"
 
 draw :: proc() {
-  drawPlayer()
-  drawEnemies()
+	drawEnemies()
+	drawPlayer()
+	drawBullets()
 }

@@ -1,10 +1,10 @@
 package core
 
-import rl "vendor:raylib"
 import "globals"
+import rl "vendor:raylib"
 
-update :: proc(external: proc(), time : ^globals.Time) {
-  time.dt = rl.GetFrameTime()
-  time.now += time.dt
-  external()
+update :: proc(external: proc(), time: ^globals.Time) {
+	time.dt = rl.GetFrameTime()
+	time.now += time.dt
+	external()
 }
