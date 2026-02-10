@@ -2,7 +2,6 @@ package game
 
 import "../core"
 import "../core/globals"
-import "core:fmt"
 import "core:math"
 import "core:slice"
 import rl "vendor:raylib"
@@ -44,6 +43,7 @@ bulletMovement :: proc(bullet: ^Bullet) {
 			core.getPolyHitbox(bullet.position, bullet.size),
 		) {
 			// Kill the player and remove bullet
+			// This allows for enemies with guns :)
 		}
 	}
 }
@@ -71,7 +71,6 @@ generateBullet :: proc(parent: globals.Entity, target: globals.Entity, friendly:
 	}
 	append_elem(&bullets, bullet)
 }
-
 
 removeBulletI :: proc(index: int) {
 	unordered_remove(&bullets, index)

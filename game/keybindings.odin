@@ -2,7 +2,6 @@
 package game
 
 import "../core"
-import rl "vendor:raylib"
 
 Action_MoveUp :: core.Action(1)
 Action_MoveDown :: core.Action(2)

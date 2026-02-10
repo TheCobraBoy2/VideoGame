@@ -1,7 +1,6 @@
 package game
 
 import "../core"
-import "core:fmt"
 import "core:slice"
 import rl "vendor:raylib"
 
