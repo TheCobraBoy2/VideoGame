@@ -46,3 +46,23 @@ getPolyHitbox :: proc(pos: rl.Vector2, radius: f32) -> rl.Rectangle {
 		{radius / 2, radius + radius / 2},
 	)
 }
+
+closestEntity :: proc(from: globals.Entity, entities: []globals.Entity) -> ^globals.Entity {
+	closest: ^globals.Entity = nil
+	minDistSq: f32 = 1e30
+
+	for &e in entities {
+		if e == from {continue}
+
+		dx := e.position.x - from.position.x
+		dy := e.position.y - from.position.y
+		distSq := dx * dx + dy * dy
+
+		if distSq < minDistSq {
+			minDistSq = distSq
+			closest = &e
+		}
+	}
+
+	return closest
+}

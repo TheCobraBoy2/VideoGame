@@ -14,6 +14,5 @@ initializeGame :: proc() {
 		rotation = 0.0,
 		speed    = 250.0,
 	}
-	e := generateEnemy()
-	generateBullet(player, e, true)
+	generateWave()
 }

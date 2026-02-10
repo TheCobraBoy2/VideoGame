@@ -1,6 +1,7 @@
 package game
 
 import "../core"
+import "core:fmt"
 import "core:slice"
 import rl "vendor:raylib"
 
@@ -34,11 +35,11 @@ enemiesMovement :: proc() {
 	}
 }
 
-generateEnemy :: proc() -> Enemy {
+generateEnemy :: proc(speed: f32) -> Enemy {
 	enemy := Enemy {
 		position = core.randomOffScreenVec2(10, 150),
 		color    = rl.RED,
-		speed    = 80.0,
+		speed    = speed,
 		size     = 50.0,
 		target   = &player,
 	}
@@ -56,5 +57,21 @@ killEnemyV :: proc(enemy: Enemy) {
 	i, f := slice.linear_search(enemies[:], enemy)
 	if f {
 		killEnemyI(i)
+	}
+}
+
+generateWave :: proc() {
+	enemyCount: i32 = STARTING_ENEMY_COUNT
+	enemySpeed: f32 = STARTING_ENEMY_SPEED
+	if state.level > 1 {
+		enemyCount = cast(i32)(cast(f32)STARTING_ENEMY_COUNT *
+				(cast(f32)(state.level - 1) * ENEMY_INCREASE) +
+			1)
+		enemySpeed =
+			STARTING_ENEMY_SPEED * ((cast(f32)(state.level - 1) * ENEMY_SPEED_INCREASE) + 1)
+	}
+
+	for i in 0 ..< enemyCount {
+		generateEnemy(enemySpeed)
 	}
 }

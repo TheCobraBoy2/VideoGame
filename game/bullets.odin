@@ -33,8 +33,9 @@ bulletMovement :: proc(bullet: ^Bullet) {
 				enemy.size,
 				core.getPolyHitbox(bullet.position, bullet.size),
 			) {
-				killEnemyV(enemy)
 				removeBulletV(bullet^)
+				killEnemyV(enemy)
+				return
 			}
 		}
 	} else {
@@ -79,6 +80,6 @@ removeBulletI :: proc(index: int) {
 removeBulletV :: proc(bullet: Bullet) {
 	i, f := slice.linear_search(bullets[:], bullet)
 	if f {
-		killEnemyI(i)
+		removeBulletI(i)
 	}
 }
