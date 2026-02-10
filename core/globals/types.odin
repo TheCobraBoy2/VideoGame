@@ -9,6 +9,8 @@ Time :: struct {
   dt : f32
 }
 
+DrawDebug :: bool
+
 Entity :: struct {
   position : rl.Vector2,
   size : rl.Vector2,

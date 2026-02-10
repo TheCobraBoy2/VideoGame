@@ -1,7 +1,10 @@
 package core
 
+import "core:fmt"
 import rl "vendor:raylib"
 import "globals"
+
+drawDebug : ^globals.DrawDebug
 
 draw :: proc(external : proc()) {
   rl.BeginDrawing()
@@ -12,5 +15,15 @@ draw :: proc(external : proc()) {
 }
 
 drawRectPro :: proc(pos, size: rl.Vector2, color: rl.Color, rotation: f32, origin: globals.Anchor) {
-  rl.DrawRectanglePro(createRectangleV(pos, size), anchorToVec2(origin), rotation, color)
+  anchor := anchorToVec2(origin)
+  rl.DrawRectanglePro(
+    createRectangleV(pos, size),
+    size * anchor,
+    rotation,
+    color
+  )
+  if drawDebug^ {
+    rl.DrawRectangleLinesEx(createRectangleV(pos - size * anchor, size), 2, rl.RED)
+    rl.DrawCircleV(pos, 2, rl.RED)
+  }
 }

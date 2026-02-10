@@ -10,6 +10,8 @@ main :: proc() {
 
   game.initializeGame()
 
+  core.drawDebug = &game.state.drawDebug
+
   for !rl.WindowShouldClose() {
     core.update(game.update, &game.state.time)
     core.draw(game.draw)

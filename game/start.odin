@@ -1,11 +1,13 @@
 package game
 
 import rl "vendor:raylib"
+import "../core"
 import "../core/globals"
 
 initializeGame :: proc() {
+  state.drawDebug = false
   player = Player{
-    position = rl.Vector2{globals.WINDOW_WIDTH/2, globals.WINDOW_HEIGHT/2},
+    position = core.centerOfScreen(),
     size = rl.Vector2{80, 80},
     color = rl.GREEN,
     origin = globals.Anchor.Center,

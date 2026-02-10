@@ -10,3 +10,7 @@ createRectangleV :: proc(pos, size: rl.Vector2) -> rl.Rectangle {
 anchorToVec2 :: proc(a: globals.Anchor) -> rl.Vector2 {
   return globals.Anchor_Vectors[a]
 }
+
+centerOfScreen :: proc() -> rl.Vector2 {
+  return rl.Vector2{cast(f32)rl.GetScreenWidth()/2, cast(f32)rl.GetScreenHeight()/2}
+}
