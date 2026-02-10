@@ -20,4 +20,6 @@ startWindow :: proc(title: cstring) {
 
 killWindow :: proc() {
 	rl.CloseWindow()
+	rl.UnloadShader(blur)
+	rl.UnloadRenderTexture(sceneTarget)
 }

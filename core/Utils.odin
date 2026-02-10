@@ -40,13 +40,6 @@ randomOffScreenVec2 :: proc(padding, margin: f32) -> rl.Vector2 {
 	return rl.Vector2{x, y}
 }
 
-// getPolyHitbox :: proc(pos: rl.Vector2, radius: f32) -> rl.Rectangle {
-// 	return createRectangleV(
-// 		pos - {radius / 2, radius + radius} * {0.5, 0.5},
-// 		{radius / 2, radius + radius / 2},
-// 	)
-// }
-
 getPolyHitbox :: proc(center: rl.Vector2, radius: f32) -> rl.Rectangle {
 	return rl.Rectangle {
 		x = center.x - radius,
