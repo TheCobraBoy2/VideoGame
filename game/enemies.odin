@@ -1,7 +1,6 @@
 package game
 
 import "../core"
-import "core:fmt"
 import "core:slice"
 import rl "vendor:raylib"
 
@@ -49,7 +48,6 @@ generateEnemy :: proc(speed: f32) -> Enemy {
 }
 
 killEnemyI :: proc(index: int) {
-	free(enemies[index].target)
 	unordered_remove(&enemies, index)
 }
 

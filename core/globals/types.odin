@@ -10,6 +10,7 @@ Time :: struct {
 }
 
 DrawDebug :: bool
+Paused :: bool
 
 Entity :: struct {
 	position: rl.Vector2,

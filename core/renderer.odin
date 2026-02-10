@@ -5,15 +5,42 @@ import "globals"
 import rl "vendor:raylib"
 
 drawDebug: ^globals.DrawDebug
+paused: ^globals.Paused
+blurAmount: f32 = 2.0
 
-draw :: proc(external: proc()) {
-	rl.BeginDrawing()
-	defer rl.EndDrawing()
-
+draw :: proc(external: proc(), topExternal: proc()) {
+	rl.BeginTextureMode(sceneTarget)
 	rl.ClearBackground(rl.BLUE)
 	external()
+	rl.EndTextureMode()
+
+	rl.BeginDrawing()
+	rl.ClearBackground(rl.BLACK)
+
+	if paused^ {
+		rl.SetShaderValue(blur, blurLoc, &blurAmount, rl.ShaderUniformDataType.FLOAT)
+		rl.BeginShaderMode(blur)
+	}
+
+	rl.DrawTextureRec(
+		sceneTarget.texture,
+		rl.Rectangle {
+			0,
+			0,
+			cast(f32)sceneTarget.texture.width,
+			-cast(f32)sceneTarget.texture.height,
+		},
+		rl.Vector2{0, 0},
+		rl.WHITE,
+	)
+
+	if paused^ {
+		rl.EndShaderMode()
+	}
+
+	topExternal()
+
 	if drawDebug^ {
-		// Drawing FPS
 		rl.DrawTextEx(
 			rl.GetFontDefault(),
 			fmt.ctprint("FPS:", rl.GetFPS()),
@@ -23,6 +50,7 @@ draw :: proc(external: proc()) {
 			rl.WHITE,
 		)
 	}
+	rl.EndDrawing()
 }
 
 drawRectPro :: proc(
@@ -44,14 +72,34 @@ drawCircle :: proc(pos: rl.Vector2, size: f32, color: rl.Color) {
 	if drawDebug^ {
 		rl.DrawCircleV(pos, 3, rl.WHITE)
 		rl.DrawCircleLinesV(pos, size, rl.WHITE)
+		rl.DrawCircleLinesV(pos, size + 0.5, rl.WHITE)
 		rl.DrawCircleLinesV(pos, size + 1, rl.WHITE)
-		rl.DrawCircleLinesV(pos, size + 2, rl.WHITE)
+	}
+}
+
+drawRotatedHitbox :: proc(center: rl.Vector2, radius, rotation: f32) {
+	half := rl.Vector2{radius, radius}
+
+	corners := [4]rl.Vector2 {
+		center + rl.Vector2{-half.x, -half.y},
+		center + rl.Vector2{half.x, -half.y},
+		center + rl.Vector2{half.x, half.y},
+		center + rl.Vector2{-half.x, half.y},
+	}
+
+	for i in 0 ..< 4 {
+		corners[i] = rl.Vector2Rotate(corners[i] - center, rotation) + center
+	}
+
+	for i in 0 ..< 4 {
+		j := (i + 1) % 4
+		rl.DrawLineV(corners[i], corners[j], rl.RED)
 	}
 }
 
 drawPolygon :: proc(pos: rl.Vector2, sides: i32, radius, rotation: f32, color: rl.Color) {
 	rl.DrawPoly(pos, sides, radius, rotation, color)
 	if drawDebug^ {
-		rl.DrawRectangleLinesEx(getPolyHitbox(pos, radius), 2, rl.RED)
+		drawRotatedHitbox(pos, 4, rotation)
 	}
 }

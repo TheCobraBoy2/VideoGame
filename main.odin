@@ -10,9 +10,10 @@ main :: proc() {
 
 	game.initializeGame()
 	core.drawDebug = &game.state.drawDebug
+	core.paused = &game.state.paused
 
 	for !rl.WindowShouldClose() {
 		core.update(game.update, &game.state.time)
-		core.draw(game.draw)
+		core.draw(game.draw, game.onTop)
 	}
 }

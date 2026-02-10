@@ -27,6 +27,7 @@ State :: struct {
 	using time: globals.Time,
 	drawDebug:  globals.DrawDebug,
 	level:      i32,
+	paused:     bool,
 }
 
 state: State

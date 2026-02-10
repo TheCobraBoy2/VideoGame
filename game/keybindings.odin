@@ -18,6 +18,10 @@ playerKeys: core.KeyMap = {
 	Action_Menu      = {.ESCAPE},
 }
 
+globalKeys: core.KeyMap = {
+	Action_Menu = {.ESCAPE},
+}
+
 debugKeys: core.KeyMap = {
 	Action_Debug = {.F2},
 }
