@@ -1,0 +1,5 @@
+package globals
+
+TARGET_FPS :: 60
+WINDOW_HEIGHT :: 720
+WINDOW_WIDTH :: 1080
