@@ -1,7 +1,8 @@
 package game
 
 update :: proc() {
-  playerMovement()
-  enemiesMovement()
-  handleDebug()
+	bulletsMovement()
+	playerMovement()
+	enemiesMovement()
+	handleDebug()
 }

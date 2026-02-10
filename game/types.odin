@@ -1,6 +1,7 @@
 package game
 
 import "../core/globals"
+import rl "vendor:raylib"
 
 Player :: struct {
 	using rectEntity: globals.RectEntity,
@@ -13,6 +14,8 @@ Enemy :: struct {
 
 Bullet :: struct {
 	using polyEntity: globals.PolyEntity,
+	direction:        rl.Vector2,
+	friendly:         bool,
 }
 
 State :: struct {

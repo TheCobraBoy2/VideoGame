@@ -14,6 +14,6 @@ initializeGame :: proc() {
 		rotation = 0.0,
 		speed    = 250.0,
 	}
-	generateEnemy()
-	generateBullet(player)
+	e := generateEnemy()
+	generateBullet(player, e, true)
 }

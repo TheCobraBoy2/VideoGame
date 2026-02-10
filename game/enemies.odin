@@ -26,7 +26,7 @@ enemyMovement :: proc(enemy: ^Enemy) {
 		dir = rl.Vector2Normalize(dir)
 	}
 
-	enemy.position += dir * (enemy.speed * rl.GetFrameTime())
+	enemy.position += dir * (enemy.speed * state.dt)
 }
 
 enemiesMovement :: proc() {
@@ -35,7 +35,7 @@ enemiesMovement :: proc() {
 	}
 }
 
-generateEnemy :: proc() {
+generateEnemy :: proc() -> Enemy {
 	enemy := Enemy {
 		position = core.randomOffScreenVec2(10, 150),
 		color    = rl.RED,
@@ -45,6 +45,7 @@ generateEnemy :: proc() {
 	}
 
 	append_elem(&enemies, enemy)
+	return enemy
 }
 
 killEnemyI :: proc(index: int) {
