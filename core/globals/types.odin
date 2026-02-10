@@ -37,6 +37,17 @@ CircleEntity :: struct {
 	size:         f32,
 }
 
+Particle :: struct {
+	position: rl.Vector2,
+	velocity: rl.Vector2,
+	size:     rl.Vector2,
+	color:    rl.Color,
+	life:     f32,
+	update:   proc(p: ^Particle),
+}
+
+particles: [dynamic]Particle
+
 Anchor :: enum {
 	TopLeft,
 	Top,

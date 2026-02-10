@@ -14,7 +14,7 @@ startWindow :: proc(title: cstring) {
 	rl.InitWindow(globals.WINDOW_WIDTH, globals.WINDOW_HEIGHT, title)
 	rl.SetExitKey(globals.EXIT_KEY)
 	sceneTarget = rl.LoadRenderTexture(rl.GetScreenWidth(), rl.GetScreenHeight())
-	blur = rl.LoadShader(nil, "blur.fs")
+	blur = rl.LoadShader(nil, "resources/shaders/blur.fs")
 	blurLoc = rl.GetShaderLocation(blur, "blurSize")
 }
 

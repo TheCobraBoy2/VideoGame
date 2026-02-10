@@ -48,6 +48,16 @@ generateEnemy :: proc(speed: f32) -> Enemy {
 }
 
 killEnemyI :: proc(index: int) {
+	e: Enemy = enemies[index]
+	core.emit_particles(
+		e.position,
+		20,
+		rl.RED,
+		{4, 4},
+		{100, 300},
+		{0.5, 1.0},
+		core.spring_behavior,
+	)
 	unordered_remove(&enemies, index)
 }
 

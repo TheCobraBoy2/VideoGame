@@ -11,6 +11,9 @@ blurAmount: f32 = 2.0
 draw :: proc(external: proc(), topExternal: proc()) {
 	rl.BeginTextureMode(sceneTarget)
 	rl.ClearBackground(rl.BLUE)
+	for p in globals.particles {
+		rl.DrawCircleV(p.position, rl.Vector2Length(p.size), p.color)
+	}
 	external()
 	rl.EndTextureMode()
 

@@ -10,6 +10,7 @@ ENEMY_SPEED_INCREASE :: 0.005
 
 Player :: struct {
 	using rectEntity: globals.RectEntity,
+	attackSpeed:      f32,
 }
 
 Enemy :: struct {

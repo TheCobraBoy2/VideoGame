@@ -25,4 +25,13 @@ playerMovement :: proc() {
 
 	dir = rl.Vector2Normalize(dir)
 	player.position += dir * (player.speed * state.dt)
+	half := player.size * 0.5
+
+	min := half
+	max := rl.Vector2 {
+		cast(f32)rl.GetScreenWidth() - half.x,
+		cast(f32)rl.GetScreenHeight() - half.y,
+	}
+
+	player.position = rl.Vector2Clamp(player.position, min, max)
 }

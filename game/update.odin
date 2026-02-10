@@ -9,7 +9,7 @@ update :: proc() {
 
 	if !state.paused {
 		if len(enemies) > 0 {
-			if fireCooldown >= 0.5 {
+			if fireCooldown >= player.attackSpeed {
 				fireCooldown = 0.0
 				generateBullet(player, core.closestEntity(player, stripEnemiesToEntities())^, true)
 			} else {
