@@ -15,6 +15,7 @@ Entity :: struct {
   color : rl.Color,
   origin : Anchor,
   rotation : f32,
+  speed : f32
 }
 
 Anchor :: enum {
