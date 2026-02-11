@@ -2,6 +2,7 @@ package game
 
 import "../core"
 import "core:fmt"
+import "core:math"
 import "core:slice"
 import rl "vendor:raylib"
 
@@ -74,9 +75,10 @@ generateWave :: proc() {
 	enemySpeed: f32 = STARTING_ENEMY_SPEED
 	if state.level > 1 {
 		enemyCount = cast(i32)(cast(f32)STARTING_ENEMY_COUNT *
-			((cast(f32)(state.level - 1) * ENEMY_INCREASE) + 1))
+			math.pow(1.0 + ENEMY_INCREASE, cast(f32)(state.level - 1)))
 		enemySpeed =
-			STARTING_ENEMY_SPEED * ((cast(f32)(state.level - 1) * ENEMY_SPEED_INCREASE) + 1)
+			(STARTING_ENEMY_SPEED *
+				math.pow(1.0 + ENEMY_SPEED_INCREASE, cast(f32)(state.level - 1)))
 	}
 
 	for i in 0 ..< enemyCount {
@@ -90,7 +92,7 @@ updateEnemies :: proc() {
 		if rl.CheckCollisionCircleRec(
 			enemy.position,
 			enemy.size,
-			core.createRectangleV(player.position, player.size),
+			core.createRectangleV(player.position - player.size * 0.5, player.size),
 		) {
 			player.alive = false
 			fmt.println("Player DIED")

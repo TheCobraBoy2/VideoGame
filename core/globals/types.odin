@@ -53,8 +53,34 @@ Cooldown :: struct {
 	limitation: proc() -> bool,
 }
 
+/*
+pos: rl.Vector2,
+	size: rl.Vector2,
+	text: cstring,
+	callback: proc(),
+	fontSize: f32 = 20,
+	defaultColor: rl.Color = rl.LIGHTGRAY,
+	hoverColor: rl.Color = rl.GRAY,
+	clickColor: rl.Color = rl.BLACK,
+*/
+
+Button :: struct {
+	callback:     proc(),
+	limitation:   proc() -> bool,
+	size:         rl.Vector2,
+	text:         cstring,
+	position:     rl.Vector2,
+	fontSize:     f32,
+	defaultColor: rl.Color,
+	hoverColor:   rl.Color,
+	clickColor:   rl.Color,
+	isHovered:    bool,
+	isClicked:    bool,
+}
+
 particles: [dynamic]Particle
 cooldowns: [dynamic]Cooldown
+buttons: [dynamic]Button
 
 Anchor :: enum {
 	TopLeft,

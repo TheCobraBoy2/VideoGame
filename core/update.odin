@@ -10,5 +10,6 @@ update :: proc(external: proc(), time: ^globals.Time) {
 		updateParticles()
 		updateCooldowns()
 	}
+	updateButtons()
 	external()
 }

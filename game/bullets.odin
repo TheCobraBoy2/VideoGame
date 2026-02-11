@@ -63,7 +63,7 @@ generateBullet :: proc(parent: globals.Entity, target: globals.Entity, friendly:
 	bullet := Bullet {
 		position  = parent.position,
 		color     = rl.BLACK,
-		speed     = 300.0,
+		speed     = 450.0,
 		size      = 10.0,
 		sides     = 3,
 		rotation  = rotation,

@@ -12,6 +12,24 @@ handlePause :: proc() {
 	}
 }
 
+initPause :: proc() {
+	core.createButton(
+		{cast(f32)rl.GetScreenWidth() * 0.5, cast(f32)rl.GetScreenHeight() * 0.85},
+		{400, 100},
+		"Leave Game",
+		proc() {
+			rl.CloseWindow()
+		},
+		proc() -> bool {
+			return state.paused
+		},
+		50,
+		rl.SKYBLUE,
+		rl.DARKBLUE,
+		rl.SKYBLUE,
+	)
+}
+
 drawPauseMenu :: proc() {
 	font := rl.GetFontDefault()
 	text: cstring = "Paused"
@@ -25,18 +43,6 @@ drawPauseMenu :: proc() {
 	origin := rl.Vector2{size.x * 0.5, 0.0}
 
 	rl.DrawTextPro(font, text, pos, origin, 0.0, fontSize, spacing, rl.WHITE)
-	core.drawButton(
-		{cast(f32)rl.GetScreenWidth() * 0.5, cast(f32)rl.GetScreenHeight() * 0.85},
-		{400, 100},
-		"Leave Game",
-		proc() {
-			rl.CloseWindow()
-		},
-		50,
-		rl.SKYBLUE,
-		rl.DARKBLUE,
-		rl.SKYBLUE,
-	)
 }
 
 drawStartLevel :: proc() {

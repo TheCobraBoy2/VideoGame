@@ -20,7 +20,7 @@ randomOffScreenVec2 :: proc(padding, margin: f32) -> rl.Vector2 {
 	width := cast(f32)rl.GetScreenWidth()
 	height := cast(f32)rl.GetScreenHeight()
 
-	side := rand.int_range(0, 3)
+	side := rand.int_range(0, 4)
 	offset := padding + rand.float32_range(0, margin)
 
 	x := rand.float32_range(0, width)

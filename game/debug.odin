@@ -12,7 +12,7 @@ handleDebug :: proc() {
 }
 
 debugPos :: proc(c: f32) -> rl.Vector2 {
-	return rl.Vector2{5, 5 + (c * 20)}
+	return rl.Vector2{5, 5 + (c * 23)}
 }
 
 curInd: f32 = 1.0
@@ -140,10 +140,30 @@ spacing :: 3
 color :: rl.BLACK
 
 drawDebug :: proc() {
+	enemyCount: i32 = STARTING_ENEMY_COUNT
+	enemySpeed: f32 = STARTING_ENEMY_SPEED
+	if state.level > 1 {
+		enemyCount = cast(i32)(cast(f32)STARTING_ENEMY_COUNT *
+			math.pow(1.0 + ENEMY_INCREASE, cast(f32)(state.level - 1)))
+		enemySpeed =
+			math.round(
+				(STARTING_ENEMY_SPEED *
+					math.pow(1.0 + ENEMY_SPEED_INCREASE, cast(f32)(state.level - 1))) *
+				100.0,
+			) /
+			100.0
+	}
 	curInd = 1.0
-	drawDebugText("Remaining Enemies: ", len(enemies))
-	drawDebugText("BulletCount: ", len(bullets))
-	drawDebugText("Level: ", state.level)
+	speed := fmt.ctprintf("%.2f", enemySpeed)
+	aSpeed := fmt.ctprintf("%.1f", math.round(player.attackSpeed * 10.0) / 10.0)
+	now := fmt.ctprintf("%.3f", math.round(state.now * 1000.0) / 1000.0)
+	drawDebugText("Session Time:", now)
+	drawDebugText("Level Enemies:", enemyCount)
+	drawDebugText("Remaining Enemies:", len(enemies))
+	drawDebugText("Enemy Speed: ~", speed)
+	drawDebugText("Level:", state.level)
+	drawDebugText("Bullet Count:", len(bullets))
+	drawDebugText("Attack Speed:", aSpeed)
 	drawDebugText("Alive:", player.alive)
 	drawBulletRays()
 	drawTargetLine()
