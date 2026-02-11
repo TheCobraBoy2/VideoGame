@@ -5,10 +5,14 @@ import "../core/globals"
 import rl "vendor:raylib"
 
 blur: rl.Shader
+startGen: bool
 
 initializeGame :: proc() {
+	createCooldowns()
 	state.drawDebug = false
 	state.paused = false
+	state.level = 0
+	startGen = false
 	player = Player {
 		position    = core.centerOfScreen(),
 		size        = rl.Vector2{80, 80},
@@ -18,6 +22,4 @@ initializeGame :: proc() {
 		speed       = 250.0,
 		attackSpeed = 3.0,
 	}
-
-	generateWave()
 }

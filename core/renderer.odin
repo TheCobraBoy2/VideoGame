@@ -50,7 +50,7 @@ draw :: proc(external: proc(), topExternal: proc()) {
 			rl.Vector2{5, 5},
 			24,
 			3,
-			rl.WHITE,
+			rl.BLACK,
 		)
 	}
 	rl.EndDrawing()

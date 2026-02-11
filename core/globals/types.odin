@@ -46,7 +46,15 @@ Particle :: struct {
 	update:   proc(p: ^Particle),
 }
 
+Cooldown :: struct {
+	time:       f32,
+	duration:   ^f32,
+	callback:   proc(),
+	limitation: proc() -> bool,
+}
+
 particles: [dynamic]Particle
+cooldowns: [dynamic]Cooldown
 
 Anchor :: enum {
 	TopLeft,

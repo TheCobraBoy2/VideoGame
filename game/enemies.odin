@@ -73,8 +73,7 @@ generateWave :: proc() {
 	enemySpeed: f32 = STARTING_ENEMY_SPEED
 	if state.level > 1 {
 		enemyCount = cast(i32)(cast(f32)STARTING_ENEMY_COUNT *
-				(cast(f32)(state.level - 1) * ENEMY_INCREASE) +
-			1)
+			((cast(f32)(state.level - 1) * ENEMY_INCREASE) + 1))
 		enemySpeed =
 			STARTING_ENEMY_SPEED * ((cast(f32)(state.level - 1) * ENEMY_SPEED_INCREASE) + 1)
 	}

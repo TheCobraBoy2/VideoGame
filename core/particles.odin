@@ -44,3 +44,18 @@ emit_particles :: proc(
 		append_elem(&globals.particles, p)
 	}
 }
+
+updateParticles :: proc() {
+	for &p, i in globals.particles {
+		if p.update != nil {
+			p.update(&p)
+		} else {
+			p.position += p.velocity * rl.GetFrameTime()
+		}
+
+		p.life -= rl.GetFrameTime()
+		if p.life <= 0 {
+			unordered_remove(&globals.particles, i)
+		}
+	}
+}
