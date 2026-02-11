@@ -107,26 +107,37 @@ drawPolygon :: proc(pos: rl.Vector2, sides: i32, radius, rotation: f32, color: r
 	}
 }
 
-drawButton :: proc(pos: rl.Vector2, size: rl.Vector2, text: cstring, callback: proc()) {
+drawButton :: proc(
+	pos: rl.Vector2,
+	size: rl.Vector2,
+	text: cstring,
+	callback: proc(),
+	fontSize: f32 = 20,
+	defaultColor: rl.Color = rl.LIGHTGRAY,
+	hoverColor: rl.Color = rl.GRAY,
+	clickColor: rl.Color = rl.BLACK,
+) {
+	origin := globals.Anchor.Center
+	anchor := anchorToVec2(origin)
 	mousePos := rl.GetMousePosition()
 	rect := createRectangleV(pos, size)
 
-	isHovered := rl.CheckCollisionPointRec(mousePos, rect)
+	isHovered := rl.CheckCollisionPointRec(mousePos, createRectangleV(pos - size * anchor, size))
 	isClicked := isHovered && rl.IsMouseButtonPressed(.LEFT)
 
-	backgroundColor := rl.LIGHTGRAY
+	backgroundColor := defaultColor
 	if isHovered {
-		backgroundColor = rl.GRAY
+		backgroundColor = hoverColor
+	}
+	if isClicked {
+		backgroundColor = clickColor
 	}
 
-	rl.DrawRectangleRec(rect, backgroundColor)
-	rl.DrawRectangleLinesEx(rect, 2, rl.BLACK)
+	rl.DrawRectanglePro(rect, size * anchor, 0.0, backgroundColor)
+	rl.DrawRectangleLinesEx(createRectangleV(pos - size * anchor, size), 2, rl.BLACK)
 
-	textWidth := rl.MeasureText(text, 20)
-	textx := rect.x + (rect.width - cast(f32)textWidth) * 0.5
-	texty := rect.y + (rect.height - 20) * 0.5
-
-	rl.DrawText(text, cast(i32)textx, cast(i32)texty, 20, rl.BLACK)
+	textSize := rl.MeasureTextEx(rl.GetFontDefault(), text, fontSize, 3)
+	rl.DrawTextPro(rl.GetFontDefault(), text, pos, textSize / 2, 0.0, fontSize, 3, rl.BLACK)
 
 	if isClicked {
 		callback()
