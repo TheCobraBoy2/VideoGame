@@ -10,7 +10,7 @@ update :: proc() {
 
 	if !state.paused {
 		playerMovement()
-		enemiesMovement()
+		updateEnemies()
 		bulletsMovement()
 		if len(enemies) <= 0 {
 			startGen = true

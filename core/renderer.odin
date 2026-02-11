@@ -106,3 +106,29 @@ drawPolygon :: proc(pos: rl.Vector2, sides: i32, radius, rotation: f32, color: r
 		drawRotatedHitbox(pos, 4, rotation)
 	}
 }
+
+drawButton :: proc(pos: rl.Vector2, size: rl.Vector2, text: cstring, callback: proc()) {
+	mousePos := rl.GetMousePosition()
+	rect := createRectangleV(pos, size)
+
+	isHovered := rl.CheckCollisionPointRec(mousePos, rect)
+	isClicked := isHovered && rl.IsMouseButtonPressed(.LEFT)
+
+	backgroundColor := rl.LIGHTGRAY
+	if isHovered {
+		backgroundColor = rl.GRAY
+	}
+
+	rl.DrawRectangleRec(rect, backgroundColor)
+	rl.DrawRectangleLinesEx(rect, 2, rl.BLACK)
+
+	textWidth := rl.MeasureText(text, 20)
+	textx := rect.x + (rect.width - cast(f32)textWidth) * 0.5
+	texty := rect.y + (rect.height - 20) * 0.5
+
+	rl.DrawText(text, cast(i32)textx, cast(i32)texty, 20, rl.BLACK)
+
+	if isClicked {
+		callback()
+	}
+}

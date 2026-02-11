@@ -1,6 +1,7 @@
 package game
 
 import "../core"
+import "core:fmt"
 import "core:slice"
 import rl "vendor:raylib"
 
@@ -80,5 +81,19 @@ generateWave :: proc() {
 
 	for i in 0 ..< enemyCount {
 		generateEnemy(enemySpeed)
+	}
+}
+
+updateEnemies :: proc() {
+	for &enemy in enemies {
+		enemyMovement(&enemy)
+		if rl.CheckCollisionCircleRec(
+			enemy.position,
+			enemy.size,
+			core.createRectangleV(player.position, player.size),
+		) {
+			player.alive = false
+			fmt.println("Player DIED")
+		}
 	}
 }

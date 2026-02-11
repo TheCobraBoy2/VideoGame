@@ -25,6 +25,9 @@ drawPauseMenu :: proc() {
 	origin := rl.Vector2{size.x * 0.5, 0.0}
 
 	rl.DrawTextPro(font, text, pos, origin, 0.0, fontSize, spacing, rl.WHITE)
+	core.drawButton(core.centerOfScreen(), {100, 100}, "Quit", proc() {
+		rl.CloseWindow()
+	})
 }
 
 drawStartLevel :: proc() {

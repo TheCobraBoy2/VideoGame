@@ -20,6 +20,7 @@ initializeGame :: proc() {
 		origin      = globals.Anchor.Center,
 		rotation    = 0.0,
 		speed       = 250.0,
-		attackSpeed = 3.0,
+		attackSpeed = 0.3,
+		alive       = true,
 	}
 }
